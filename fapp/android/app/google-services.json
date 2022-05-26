@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "17229101327",
+    "project_id": "biwas-chat",
+    "storage_bucket": "biwas-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17229101327:android:2bdbf4ed32814a8afb267a",
+        "android_client_info": {
+          "package_name": "com.example.fapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "17229101327-3op0o4d7ftfoqju4mto587fubqq6vp80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzO4dPI3pQu632aPwsDdgone0x2RptxTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "17229101327-3op0o4d7ftfoqju4mto587fubqq6vp80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
