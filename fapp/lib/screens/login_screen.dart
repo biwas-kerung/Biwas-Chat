@@ -6,15 +6,16 @@ import 'package:fapp/constants.dart';
 import 'package:fapp/screens/chat_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../components/rounded_button.dart';
+import '../services/authentication.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   static const String id = 'login_screen';
-  
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -25,6 +26,15 @@ class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
   late String email;
   late String password;
+
+  bool isBioExist = false;
+
+  Future<bool> get hasBio async {
+    List<BiometricType> availableBiometrics =
+        await localAuth.getAvailableBiometrics();
+    return availableBiometrics.isNotEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,6 +107,37 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FloatingActionButton(
+                    onPressed: (() async {
+                      //Write  finger print code here,
+                      bool isAuthenticated = await localAuth.authenticate(
+                        localizedReason: 'Login',
+                        options: const AuthenticationOptions(
+                          useErrorDialogs: true,
+                          stickyAuth: true,
+                        ),
+                      );
+                      if (isAuthenticated) {
+                        Navigator.pushNamed(context, ChatScreen.id);
+                      }
+                    }),
+                    child: const Icon(Icons.fingerprint),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                    width: 20.0,
+                  ),
+                  const Text(
+                    "Tap to login with fingerprint",
+                    style: TextStyle(
+                      color: Colors.indigo,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
